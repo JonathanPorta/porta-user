@@ -1,0 +1,17 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: fedora-21
+
+suites:
+  - name: default
+    run_list:
+      - recipe[porta_user::default]
+      - recipe[porta_user-test::create]
+      - recipe[porta_user-test::remove]
+    attributes:
