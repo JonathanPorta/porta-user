@@ -30,10 +30,14 @@ class Chef
       def create_user
         Chef::Resource::UserAccount.new new_resource.username, run_context do
           action :create
+          home "/home/#{ new_resource.username }"
+          manage_home false
           ssh_keygen false
         end
         Chef::Resource::UserAccount.new new_resource.username, run_context do
           action :modify
+          home "/home/#{ new_resource.username }"
+          manage_home false
           ssh_keys new_resource._ssh_keys
         end
       end
