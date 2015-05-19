@@ -29,7 +29,11 @@ class Chef
 
       def create_user
         Chef::Resource::UserAccount.new new_resource.username, run_context do
+          action :create
           ssh_keygen false
+        end
+        Chef::Resource::UserAccount.new new_resource.username, run_context do
+          action :modify
           ssh_keys new_resource._ssh_keys
         end
       end
