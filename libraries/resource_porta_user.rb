@@ -34,23 +34,26 @@ class Chef
       end
 
       def ssh_keys(arg = nil)
-        set_or_return :github_username, arg, kind_of: [Array, String]
+        set_or_return :ssh_keys, arg, kind_of: [Array, String]
       end
 
       # Massage all SSH keys
       def _ssh_keys
+        Chef::Log.info "Getting keys for user #{ username } from https://github.com/#{ github_username }.keys."
         keys = Array(ssh_keys)
-        if @github_username
+        if github_username
           @github_keys = begin
-            Chef::HTTP.new('https://github.com').get("#{github_username}.keys")
+            Chef::HTTP.new('https://github.com').get("#{ github_username }.keys")
           # Use a really big hammer, github being down shouldn't break things.
           # The downside is that if github is down, it will yank your key, possibly
           # leaving login unavailable. Not sure what to do about this right now.
           rescue
-            Chef::Log.fatal "There was an issue getting keys for user #{ github_username } from https://github.com/#{github_username}.keys."
+            Chef::Log.fatal "There was an issue getting keys for user #{ username } from https://github.com/#{ github_username }.keys."
           end
+          Chef::Log.debug "Got from request: #{@github_keys}"
           keys += @github_keys.split("\n")
         end
+        Chef::Log.debug "found some keys! #{keys}"
         keys
       end
     end

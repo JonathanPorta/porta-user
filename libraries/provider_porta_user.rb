@@ -28,6 +28,7 @@ class Chef
       private
 
       def create_user
+        Chef::Log.debug "Adding keys for user #{ new_resource.username }: #{new_resource._ssh_keys}"
         Chef::Resource::UserAccount.new new_resource.username, run_context do
           action :create
           home "/home/#{ new_resource.username }"
