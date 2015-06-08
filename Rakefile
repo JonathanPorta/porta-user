@@ -40,11 +40,11 @@ desc 'Run tests on Travis'
 task travis: %w(style spec) # TODO: Figure out how to run integration tests in CI.
 
 # Default
-task default: ['style', 'spec', 'integration']
+task default: %w(style spec integration)
 
 begin
-  require "kitchen/rake_tasks"
+  require 'kitchen/rake_tasks'
   Kitchen::RakeTasks.new
 rescue LoadError
-  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV["CI"]
+  puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
 end

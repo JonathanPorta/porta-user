@@ -1,9 +1,10 @@
----
 driver:
   name: docker
+  privileged: true
+  remove_images: false
 
 provisioner:
-  name: chef_zero
+  name: chef_solo
 
 platforms:
   - name: fedora-21
@@ -13,5 +14,4 @@ suites:
     run_list:
       - recipe[porta_user::default]
       - recipe[porta_user-test::create]
-      - recipe[porta_user-test::remove]
     attributes:

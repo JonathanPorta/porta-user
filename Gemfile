@@ -8,5 +8,5 @@ group :development do
   gem 'guard-rubocop'
   gem 'rake'
 end
-gem "test-kitchen"
-gem "kitchen-vagrant"
+gem 'test-kitchen'
+gem 'kitchen-vagrant'

@@ -6,5 +6,4 @@ description 'Library cookbook that provides porta_user'
 long_description 'Library cookbook that provides porta_user'
 version '0.0.1'
 
-depends 'user'
 depends 'sudo'
