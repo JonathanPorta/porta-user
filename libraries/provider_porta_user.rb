@@ -31,7 +31,7 @@ class Chef
         home_directory = "/home/#{ new_resource.username }"
 
         u = Chef::Resource::User.new new_resource.username, run_context do
-          action :nothin
+          action :nothing
           home home_directory
           manage_home true
           ssh_keygen false
