@@ -88,6 +88,8 @@ class Chef
         home_ssh_dir_resource(home_directory)
         authorized_keys_path = "#{ home_directory }/.ssh/authorized_keys"
 
+        # Append the keys if the file exists, and the key isn't in the file.
+        # Otherwise, create and write over the file.
         if ::File.exist? authorized_keys_path
           fe = Chef::Util::FileEdit.new(authorized_keys_path)
           ssh_keys.each do |key|
@@ -101,6 +103,15 @@ class Chef
             end
           end
         end
+
+        # Make sure the authorized keys file has the correct permissions.
+        f = Chef::Resource::File.new authorized_keys_path, run_context do
+          mode '0600'
+          action :nothing
+        end
+        f.run_action(:touch)
+
+        # We assume we always got handsy
         new_resource.updated_by_last_action(true)
       end
     end
