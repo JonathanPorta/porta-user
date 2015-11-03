@@ -109,7 +109,7 @@ class Chef
           mode '0600'
           action :nothing
         end
-        f.run_action(:touch)
+        f.run_action(:create)
 
         # We assume we always got handsy
         new_resource.updated_by_last_action(true)
