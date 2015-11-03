@@ -1,4 +1,4 @@
-# porta_user Cookbook
+# porta_user Cookbook [![Build Status](https://travis-ci.org/JonathanPorta/porta-user.svg)](https://travis-ci.org/JonathanPorta/porta-user)
 TODO: Why in the hell does the cookbook exist?
 
 ## Requirements
